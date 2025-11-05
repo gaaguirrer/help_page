@@ -1,0 +1,95 @@
+/* Variables para colores */
+:root {
+  --help-bg-color: #0e1935; /* Fondo oscuro */
+  --help-text-color: #e4e6eb; /* Texto claro */
+  --help-link-color: #2a9df4; /* Azul claro para enlaces */
+  --help-link-hover: #75c7ff; /* Color al pasar el cursor */
+  --help-border-color: #444c6e; /* Bordes suaves */
+}
+
+/* Fondo general del área de ayuda */
+.help-content {
+  background-color: var(--help-bg-color);
+  color: var(--help-text-color);
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid var(--help-border-color);
+  font-family: Arial, sans-serif;
+}
+
+/* Títulos */
+.help-content h2 {
+  color: var(--help-text-color);
+  font-size: 1.8em;
+  margin-bottom: 10px;
+  border-bottom: 2px solid var(--help-border-color);
+  padding-bottom: 5px;
+}
+
+/* Texto general */
+.help-content p,
+.help-content li {
+  color: var(--help-text-color);
+  line-height: 1.6;
+  font-size: 1.1em;
+}
+
+/* Listas ordenadas y no ordenadas */
+.help-content ol,
+.help-content ul {
+  padding-left: 20px;
+}
+
+/* Estilo para enlaces */
+.help-content a {
+  color: var(--help-link-color);
+  text-decoration: none;
+  font-weight: bold;
+}
+.help-content a:hover {
+  color: var(--help-link-hover);
+  text-decoration: underline;
+}
+
+/* Estilo para imágenes */
+.img-completo {
+  display: block;
+  margin: 20px auto;
+  width: 100%;
+  max-width: 600px;
+}
+
+.img-medio {
+  float: left;
+  margin-right: 20px;
+  width: 50%;
+  max-width: 300px;
+}
+
+.img-minimo {
+  display: inline-block;
+  vertical-align: middle;
+  width: 30px;
+  height: auto;
+  margin: 0 5px;
+}
+
+/* Espaciado adicional para limpiar contenido flotante */
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Ajuste adicional para listas */
+.help-content ol > li,
+.help-content ul > li {
+  margin-bottom: 10px;
+}
+
+/* Separador para contenido extenso */
+.help-content hr {
+  border: 0;
+  border-top: 1px solid var(--help-border-color);
+  margin: 20px 0;
+}

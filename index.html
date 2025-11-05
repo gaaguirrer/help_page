@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Ayuda</title>
+    <link rel="stylesheet" href="estilos/styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+</head>
+<body>
+    <div id="container">
+        <aside id="menu-principal">
+            <div id="logo">
+                <img src="assets/logo.png" alt="Logo del sistema">
+            </div>
+            
+            <ul class="nav">
+                <li><button onclick="updateTitle('Factura')"><i class="bi bi-file-earmark-text"></i> FACTURA </button></li>
+                <li><button onclick="updateTitle('Producto')"><i class="bi bi-box"></i> PRODUCTO </button></li>
+                <li><button onclick="updateTitle('Usuario')"><i class="bi bi-person"></i> USUARIO </button></li>
+                <li><button onclick="updateTitle('Compra')"><i class="bi bi-cart"></i> COMPRA </button></li>
+                <li><button onclick="updateTitle('Inventario')"><i class="bi bi-clipboard-data"></i> INVENTARIO</button></li>
+                <li><button onclick="updateTitle('Categoría')"><i class="bi bi-tags"></i> CATEGORÍA</button></li>
+                <li><button onclick="updateTitle('Reportes')"><i class="bi bi-bar-chart"></i> REPORTES</button></li>
+                <li><button onclick="updateTitle('Detalle')"><i class="bi bi-bar-chart"></i> DETALLE</button></li>
+            </ul>
+        </aside>
+
+        <div id="main-content">
+            <header id="titulo-principal">
+                <h1>Bienvenido al Sistema de Ayuda</h1>
+            </header>
+            <h3 id="titulo-secundario">Seleccione el tema a la izquierda</h3>
+            <section id="acciones">
+                <!-- Botones de acciones se cargarán dinámicamente -->
+            </section>
+
+            <section id="area-ayuda">
+                <iframe src="" frameborder="0"></iframe>
+            </section>
+        </div>
+    </div>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
