@@ -11,10 +11,26 @@ document.addEventListener('DOMContentLoaded', () => {
         Detalle: ["Agregar", "Quitar"]
     };
 
+    // Normaliza nombres de carpeta (evitar acentos/espacios)
+    const categoriaToPath = (nombre) => {
+        const mapa = {
+            'Categoría': 'categoria'
+        };
+        if (mapa[nombre]) return mapa[nombre];
+        return nombre
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .toLowerCase();
+    };
+
     // Función para actualizar el título y cargar acciones según la categoría seleccionada
     window.updateTitle = function (categoria) {
         document.querySelector("#titulo-secundario").innerText = categoria;
         cargarAcciones(categoria);
+        // Actualiza hash para enlaces profundos
+        const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+        params.set('categoria', categoria);
+        params.delete('accion');
+        location.hash = params.toString();
     };
 
     // Función para cargar las acciones de cada categoría
@@ -29,12 +45,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
             boton.addEventListener("click", () => {
                 // Remover clases activas de otros botones
-                document.querySelectorAll("#acciones button").forEach(btn => btn.classList.remove("activo"));
+                document.querySelectorAll("#acciones button").forEach(btn => {
+                    btn.classList.remove("activo");
+                    btn.removeAttribute('aria-current');
+                });
                 boton.classList.add("activo");
+                boton.setAttribute('aria-current', 'true');
 
                 // Construir la ruta del archivo HTML que se cargará en el iframe
-                const ruta = `contenido/${categoria.toLowerCase()}/${accion.toLowerCase()}.html`;
+                const ruta = `contenido/${categoriaToPath(categoria)}/${accion.toLowerCase()}.html`;
                 cargarContenidoIframe(ruta);
+
+                // Añade acción al hash
+                const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+                params.set('accion', accion);
+                location.hash = params.toString();
             });
 
             contenedorAcciones.appendChild(boton);
@@ -49,25 +74,81 @@ document.addEventListener('DOMContentLoaded', () => {
     botonesMenuPrincipal.forEach(boton => {
         boton.addEventListener('click', () => {
             // Remover clases activas de otros botones
-            botonesMenuPrincipal.forEach(btn => btn.classList.remove('activo'));
+            botonesMenuPrincipal.forEach(btn => {
+                btn.classList.remove('activo');
+                btn.removeAttribute('aria-current');
+            });
             boton.classList.add('activo');
+            boton.setAttribute('aria-current', 'true');
         });
     });
 
-    // Función para cargar contenido en el iframe y verificar la carga del archivo CSS
+    // Cargar contenido en iframe e inyectar CSS dentro del documento del iframe
     function cargarContenidoIframe(path) {
-        const areaAyuda = document.querySelector('#area-ayuda iframe');
+        const iframe = document.querySelector('#area-ayuda iframe');
 
-        // Actualizar la ruta del iframe
-        areaAyuda.src = path;
+        // Indicador simple de carga accesible
+        iframe.setAttribute('title', 'Área de ayuda (cargando...)');
 
-        // Verificar si el archivo CSS está cargado; si no, agregarlo
-        const cssPath = "estilos/help-styles.css";
-        if (!document.querySelector(`link[href="${cssPath}"]`)) {
-            const link = document.createElement("link");
-            link.rel = "stylesheet";
-            link.href = cssPath;
-            document.head.appendChild(link);
-        }
+        const onLoad = () => {
+            try {
+                const doc = iframe.contentDocument || iframe.contentWindow?.document;
+                if (doc) {
+                    // Inyecta la hoja de estilos en el head del iframe si no está
+                    const cssPath = "estilos/help-styles.css";
+                    if (!doc.querySelector(`link[href="${cssPath}"]`)) {
+                        const link = doc.createElement("link");
+                        link.rel = "stylesheet";
+                        link.href = cssPath;
+                        doc.head.appendChild(link);
+                    }
+                    // Envolver contenido en .help-content si no existe
+                    const root = doc.body;
+                    if (root && !doc.querySelector('.help-content')) {
+                        const wrapper = doc.createElement('div');
+                        wrapper.className = 'help-content';
+                        while (root.firstChild) wrapper.appendChild(root.firstChild);
+                        root.appendChild(wrapper);
+                    }
+                }
+            } catch (e) {
+                console.warn('No se pudo inyectar estilos en el iframe:', e);
+            } finally {
+                iframe.setAttribute('title', 'Área de ayuda');
+            }
+            iframe.removeEventListener('load', onLoad);
+            iframe.removeEventListener('error', onError);
+        };
+
+        const onError = () => {
+            const doc = iframe.contentDocument || iframe.contentWindow?.document;
+            if (doc) {
+                doc.open();
+                doc.write('<!DOCTYPE html><html><head><link rel="stylesheet" href="estilos/help-styles.css"></head><body><div class="help-content"><h2>Error</h2><p>No se pudo cargar la ayuda.</p></div></body></html>');
+                doc.close();
+            }
+            iframe.setAttribute('title', 'Área de ayuda (error)');
+            iframe.removeEventListener('load', onLoad);
+            iframe.removeEventListener('error', onError);
+        };
+
+        iframe.addEventListener('load', onLoad);
+        iframe.addEventListener('error', onError);
+        iframe.src = path;
     }
+
+    // Restaurar desde hash al cargar la página
+    (function restaurarDesdeHash() {
+        const params = new URLSearchParams(location.hash.replace(/^#/, ''));
+        const categoria = params.get('categoria');
+        const accion = params.get('accion');
+        if (categoria && accionesPorCategoria[categoria]) {
+            updateTitle(categoria);
+            requestAnimationFrame(() => {
+                const btn = Array.from(document.querySelectorAll('#acciones button'))
+                    .find(b => b.textContent === accion);
+                if (btn) btn.click();
+            });
+        }
+    })();
 });
