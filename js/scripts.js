@@ -102,6 +102,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         link.href = cssPath;
                         doc.head.appendChild(link);
                     }
+                    // Inyecta Bootstrap Icons para permitir <i class="bi ..."> en contenidos de ayuda
+                    const biHref = "https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css";
+                    if (!doc.querySelector(`link[href="${biHref}"]`)) {
+                        const bi = doc.createElement('link');
+                        bi.rel = 'stylesheet';
+                        bi.href = biHref;
+                        doc.head.appendChild(bi);
+                    }
                     // Envolver contenido en .help-content si no existe
                     const root = doc.body;
                     if (root && !doc.querySelector('.help-content')) {
