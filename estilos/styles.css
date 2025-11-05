@@ -1,15 +1,29 @@
-/* Variables de colores */
+/*
+  ==========================
+  VARIABLES DE COLOR (EDITABLES)
+  ==========================
+  - Cambia estos valores para personalizar la gama de colores del sitio.
+  - Mantén los nombres de las variables para no romper el resto del CSS.
+*/
 :root {
-  /* Paleta basada en el logo UNI: azul institucional y acento rojo */
-  --color-principal: #1f2f6b; /* Azul profundo para fondo principal */
-  --color-secundario: #243874; /* Azul para sidebar y bloques */
-  --color-hover: #3f4d8f; /* Azul aclarado para hover/activo */
-  --color-accento: #d62828; /* Rojo acento para indicadores */
-  --color-divider: rgba(255, 255, 255, 0.25); /* Separadores sutiles */
-  --color-texto: #ffffff;
+  --color-principal: #1f2f6b; /* Fondo principal (derecha) */
+  --color-secundario: #243874; /* Fondo del menú lateral y bloques */
+  --color-hover: #3f4d8f; /* Color al pasar el mouse o estado activo */
+  --color-accento: #d62828; /* Línea de acento para resaltar selección */
+  --color-divider: rgba(
+    255,
+    255,
+    255,
+    0.25
+  ); /* Separadores suaves entre botones */
+  --color-texto: #ffffff; /* Color de texto sobre fondos oscuros */
 }
 
-/* Reset y estilos globales */
+/*
+  RESET Y BASE TIPOGRÁFICA
+  - No cambies estas reglas a menos que sepas lo que haces.
+  - Aseguran que el diseño se vea similar en todos los navegadores.
+*/
 *,
 *::before,
 *::after {
@@ -22,6 +36,7 @@ body {
   font-family: Arial, sans-serif;
 }
 
+/* Contenedor principal: divide la pantalla en menú y contenido */
 #container {
   display: flex;
   height: 100vh;
@@ -36,8 +51,9 @@ body {
   align-items: center;
 }
 
+/* Área del logo: la imagen se recorta para llenar el espacio */
 #logo {
-  background-color: #343a40; /* Mantén el fondo por si la imagen no carga */
+  background-color: #343a40;
   width: 100%;
   height: 186px;
   display: flex;
@@ -49,14 +65,14 @@ body {
 #logo img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Ajusta la imagen para cubrir completamente el espacio */
+  object-fit: cover;
 }
 
+/* Menú (lista vertical). Si cambias a row, el menú se romperá. */
 .nav {
   width: 100%;
   list-style: none;
   padding: 0;
-  /* Evita que Bootstrap convierta la lista en fila */
   display: flex;
   flex-direction: column;
 }
@@ -147,10 +163,10 @@ body {
   color: var(--color-texto);
 }
 
-/* Indicador de selección con acento institucional en el menú */
+/* Indicador de selección en el menú: línea roja a la izquierda */
 .nav button.activo {
   border-left: 4px solid var(--color-accento);
-  padding-left: 41px; /* compensa el borde para mantener alineación */
+  padding-left: 41px;
 }
 
 .nav button:hover,
@@ -162,7 +178,6 @@ body {
   background-color: var(--color-secundario);
   padding: 0;
   margin: 0;
-
   height: calc(100% - 150px);
 }
 
@@ -172,23 +187,23 @@ body {
   border: none;
 }
 
-/* Accesibilidad: enfoque visible para navegación con teclado */
+/* Accesibilidad: muestra un contorno cuando navegas con teclado (TAB) */
 #acciones button:focus-visible,
 .nav button:focus-visible {
   outline: 3px solid #ffd166;
   outline-offset: 2px;
 }
 
-/* Tipografía fluida para títulos */
+/* Tamaño del título que se adapta al ancho de pantalla */
 #titulo-principal h1 {
   font-size: clamp(1.25rem, 2vw + 1rem, 2rem);
 }
 
 #titulo-secundario {
-  font-size: clamp(1rem, 1.2vw + .8rem, 1.25rem);
+  font-size: clamp(1rem, 1.2vw + 0.8rem, 1.25rem);
 }
 
-/* Tema oscuro automático según el sistema */
+/* Tema oscuro automático: el sistema decide. Cambia valores si lo necesitas. */
 @media (prefers-color-scheme: dark) {
   :root {
     --color-principal: #0f2746;
@@ -197,11 +212,10 @@ body {
   }
 }
 
-/* Utilidades simples */
+/* Utilidades: clases cortas que puedes reutilizar en HTML */
 .hidden {
   display: none !important;
 }
-
 .visually-hidden {
   position: absolute !important;
   width: 1px !important;

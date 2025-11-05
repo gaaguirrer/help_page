@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración generar reportes">
+  <rect width="1280" height="720" fill="#243874"/>
+  <!-- Tarjeta de reporte -->
+  <rect x="380" y="160" width="520" height="340" rx="16" fill="#ffffff" opacity="0.95"/>
+  <rect x="410" y="200" width="460" height="16" rx="8" fill="#3f4d8f"/>
+  <rect x="410" y="230" width="360" height="10" rx="5" fill="#9fb2ff"/>
+  <!-- Gráfico de líneas -->
+  <polyline points="420,420 480,360 540,380 600,320 660,340 720,300 770,320" fill="none" stroke="#d62828" stroke-width="6"/>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Generar reportes</text>
+</svg>
+

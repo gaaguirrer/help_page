@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración realizar compra">
+  <rect width="1280" height="720" fill="#1f2f6b"/>
+  <!-- Carrito -->
+  <rect x="360" y="280" width="420" height="160" rx="12" fill="#243874"/>
+  <circle cx="420" cy="470" r="24" fill="#9fb2ff"/>
+  <circle cx="700" cy="470" r="24" fill="#9fb2ff"/>
+  <rect x="360" y="240" width="500" height="24" rx="12" fill="#3f4d8f"/>
+  <!-- Botón confirmar -->
+  <rect x="920" y="360" width="180" height="48" rx="8" fill="#d62828"/>
+  <text x="1010" y="392" fill="#ffffff" font-size="18" text-anchor="middle" font-family="Arial">Confirmar</text>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Realizar compra</text>
+</svg>
+

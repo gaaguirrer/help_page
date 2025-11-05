@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración registrar usuario">
+  <rect width="1280" height="720" fill="#243874"/>
+  <!-- Avatar -->
+  <circle cx="480" cy="300" r="90" fill="#9fb2ff"/>
+  <rect x="400" y="390" width="160" height="120" rx="24" fill="#9fb2ff"/>
+  <!-- Formulario -->
+  <rect x="650" y="180" width="360" height="320" rx="16" fill="#ffffff" opacity="0.95"/>
+  <rect x="680" y="220" width="300" height="16" rx="8" fill="#3f4d8f"/>
+  <rect x="680" y="260" width="260" height="12" rx="6" fill="#9fb2ff"/>
+  <rect x="680" y="300" width="260" height="12" rx="6" fill="#9fb2ff"/>
+  <rect x="680" y="340" width="200" height="12" rx="6" fill="#9fb2ff"/>
+  <rect x="680" y="380" width="160" height="32" rx="8" fill="#d62828"/>
+  <text x="760" y="402" fill="#fff" font-size="16" font-family="Arial">Registrar</text>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Registrar usuario</text>
+</svg>
+

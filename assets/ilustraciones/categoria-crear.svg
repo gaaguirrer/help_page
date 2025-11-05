@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración crear categoría">
+  <rect width="1280" height="720" fill="#1f2f6b"/>
+  <!-- Etiquetas -->
+  <g transform="translate(420,220)">
+    <rect x="0" y="0" width="220" height="100" rx="8" fill="#243874"/>
+    <circle cx="24" cy="24" r="10" fill="#d62828"/>
+    <rect x="60" y="24" width="130" height="12" rx="6" fill="#9fb2ff"/>
+  </g>
+  <g transform="translate(640,360)">
+    <rect x="0" y="0" width="220" height="100" rx="8" fill="#243874"/>
+    <circle cx="24" cy="24" r="10" fill="#d62828"/>
+    <rect x="60" y="24" width="130" height="12" rx="6" fill="#9fb2ff"/>
+  </g>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Crear categoría</text>
+</svg>
+

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración actualizar producto">
+  <rect width="1280" height="720" fill="#1f2f6b"/>
+  <!-- Caja producto -->
+  <g transform="translate(300,160)">
+    <rect x="0" y="0" width="400" height="320" rx="16" fill="#243874"/>
+    <polygon points="0,80 200,0 400,80 200,160" fill="#3f4d8f"/>
+    <rect x="36" y="200" width="328" height="18" rx="9" fill="#9fb2ff"/>
+    <rect x="36" y="236" width="280" height="12" rx="6" fill="#9fb2ff"/>
+  </g>
+  <!-- Flecha actualizar -->
+  <g transform="translate(860,300)">
+    <circle cx="0" cy="0" r="110" fill="none" stroke="#d62828" stroke-width="16"/>
+    <path d="M-40,-40 L40,-40 L40,40" fill="none" stroke="#d62828" stroke-width="16"/>
+    <polygon points="40,40 10,20 70,20" fill="#d62828"/>
+  </g>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Actualizar producto</text>
+</svg>
+

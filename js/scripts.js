@@ -1,5 +1,12 @@
+// ================================================================
+// LÓGICA PRINCIPAL DE LA PÁGINA (NO ES NECESARIO SABER JS AVANZADO)
+// - Puedes CAMBIAR nombres de categorías y acciones abajo.
+// - Conserva las funciones y la estructura para que todo siga funcionando.
+// ================================================================
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Definición de acciones por categoría
+    // 1) Lista de acciones por cada categoría del menú.
+    //    Para agregar/quitar, edita los textos entre comillas.
     const accionesPorCategoria = {
         Factura: ["Agregar", "Actualizar", "Buscar", "Eliminar"],
         Producto: ["Agregar", "Actualizar", "Eliminar"],
@@ -11,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         Detalle: ["Agregar", "Quitar"]
     };
 
-    // Normaliza nombres de carpeta (evitar acentos/espacios)
+    // 2) Convierte el nombre de la categoría a una RUTA de carpeta válida.
+    //    No cambies esta función; solo ajusta el mapa si creas carpetas nuevas.
     const categoriaToPath = (nombre) => {
         const mapa = {
             'Categoría': 'categoria'
@@ -22,18 +30,19 @@ document.addEventListener('DOMContentLoaded', () => {
             .toLowerCase();
     };
 
-    // Función para actualizar el título y cargar acciones según la categoría seleccionada
+    // 3) Cuando haces clic en el menú izquierdo, cambiamos el título
+    //    y dibujamos los botones de acciones de esa categoría.
     window.updateTitle = function (categoria) {
         document.querySelector("#titulo-secundario").innerText = categoria;
         cargarAcciones(categoria);
-        // Actualiza hash para enlaces profundos
+        // Guardamos la categoría en la URL (hash) para poder compartir enlace.
         const params = new URLSearchParams(location.hash.replace(/^#/, ''));
         params.set('categoria', categoria);
         params.delete('accion');
         location.hash = params.toString();
     };
 
-    // Función para cargar las acciones de cada categoría
+    // 4) Crea los botones (Agregar, Buscar, etc.) y define qué hacen.
     function cargarAcciones(categoria) {
         const contenedorAcciones = document.querySelector("#acciones");
         const areaAyuda = document.querySelector("#area-ayuda iframe");
@@ -44,7 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
             boton.innerText = accion;
 
             boton.addEventListener("click", () => {
-                // Remover clases activas de otros botones
+                // Marcamos visualmente qué acción está seleccionada
                 document.querySelectorAll("#acciones button").forEach(btn => {
                     btn.classList.remove("activo");
                     btn.removeAttribute('aria-current');
@@ -52,11 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 boton.classList.add("activo");
                 boton.setAttribute('aria-current', 'true');
 
-                // Construir la ruta del archivo HTML que se cargará en el iframe
+                // Construimos la ruta del archivo de ayuda que vamos a mostrar.
                 const ruta = `contenido/${categoriaToPath(categoria)}/${accion.toLowerCase()}.html`;
                 cargarContenidoIframe(ruta);
 
-                // Añade acción al hash
+                // Guardamos también la acción en la URL para compartir enlace directo.
                 const params = new URLSearchParams(location.hash.replace(/^#/, ''));
                 params.set('accion', accion);
                 location.hash = params.toString();
@@ -65,15 +74,15 @@ document.addEventListener('DOMContentLoaded', () => {
             contenedorAcciones.appendChild(boton);
         });
 
-        // Limpiar el contenido del iframe al cambiar de categoría
+        // Limpiamos el iframe cuando se cambia de categoría.
         areaAyuda.src = "";
     }
 
-    // Función para manejar los botones del menú principal
+    // 5) Pinta el botón activo en el menú izquierdo.
     const botonesMenuPrincipal = document.querySelectorAll('.nav button');
     botonesMenuPrincipal.forEach(boton => {
         boton.addEventListener('click', () => {
-            // Remover clases activas de otros botones
+            // Quitamos el estado activo del resto y lo aplicamos al clicado.
             botonesMenuPrincipal.forEach(btn => {
                 btn.classList.remove('activo');
                 btn.removeAttribute('aria-current');
@@ -83,18 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Cargar contenido en iframe e inyectar CSS dentro del documento del iframe
+    // 6) Carga la página de ayuda en el iframe y asegura los estilos dentro del iframe.
     function cargarContenidoIframe(path) {
         const iframe = document.querySelector('#area-ayuda iframe');
 
-        // Indicador simple de carga accesible
+        // Indicamos al lector de pantalla que está cargando.
         iframe.setAttribute('title', 'Área de ayuda (cargando...)');
 
         const onLoad = () => {
             try {
                 const doc = iframe.contentDocument || iframe.contentWindow?.document;
                 if (doc) {
-                    // Inyecta la hoja de estilos en el head del iframe si no está
+                    // A) Asegura la hoja de estilos para el contenido de ayuda.
                     const cssPath = "estilos/help-styles.css";
                     if (!doc.querySelector(`link[href="${cssPath}"]`)) {
                         const link = doc.createElement("link");
@@ -102,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         link.href = cssPath;
                         doc.head.appendChild(link);
                     }
-                    // Inyecta Bootstrap Icons para permitir <i class="bi ..."> en contenidos de ayuda
+                    // B) Agrega biblioteca de iconos para poder usar <i class="bi ...">.
                     const biHref = "https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css";
                     if (!doc.querySelector(`link[href="${biHref}"]`)) {
                         const bi = doc.createElement('link');
@@ -110,7 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         bi.href = biHref;
                         doc.head.appendChild(bi);
                     }
-                    // Envolver contenido en .help-content si no existe
+                    // C) Si el HTML cargado no tiene el contenedor esperado, lo creamos.
                     const root = doc.body;
                     if (root && !doc.querySelector('.help-content')) {
                         const wrapper = doc.createElement('div');
@@ -145,7 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
         iframe.src = path;
     }
 
-    // Restaurar desde hash al cargar la página
+    // 7) Si la URL ya trae #categoria=...&accion=..., la restauramos al abrir.
     (function restaurarDesdeHash() {
         const params = new URLSearchParams(location.hash.replace(/^#/, ''));
         const categoria = params.get('categoria');

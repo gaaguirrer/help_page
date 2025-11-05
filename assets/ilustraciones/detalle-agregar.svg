@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración agregar detalle">
+  <rect width="1280" height="720" fill="#1f2f6b"/>
+  <!-- Lista -->
+  <rect x="420" y="160" width="440" height="360" rx="12" fill="#ffffff" opacity="0.95"/>
+  <rect x="450" y="200" width="280" height="12" rx="6" fill="#3f4d8f"/>
+  <rect x="450" y="240" width="340" height="10" rx="5" fill="#9fb2ff"/>
+  <rect x="450" y="280" width="320" height="10" rx="5" fill="#9fb2ff"/>
+  <rect x="450" y="320" width="300" height="10" rx="5" fill="#9fb2ff"/>
+  <!-- Botón agregar -->
+  <rect x="520" y="420" width="240" height="40" rx="8" fill="#22c55e"/>
+  <text x="640" y="446" fill="#fff" font-size="18" text-anchor="middle" font-family="Arial">Agregar línea</text>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Agregar detalle</text>
+</svg>
+

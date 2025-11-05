@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Ilustración revisar inventario">
+  <rect width="1280" height="720" fill="#243874"/>
+  <!-- Gráfico de barras -->
+  <g transform="translate(360,160)">
+    <rect x="0" y="220" width="60" height="140" fill="#9fb2ff"/>
+    <rect x="90" y="160" width="60" height="200" fill="#9fb2ff"/>
+    <rect x="180" y="110" width="60" height="250" fill="#9fb2ff"/>
+    <rect x="270" y="60" width="60" height="300" fill="#9fb2ff"/>
+  </g>
+  <!-- Clip/hoja -->
+  <rect x="820" y="200" width="240" height="280" rx="12" fill="#ffffff" opacity="0.95"/>
+  <rect x="840" y="230" width="200" height="12" rx="6" fill="#3f4d8f"/>
+  <rect x="840" y="260" width="160" height="10" rx="5" fill="#9fb2ff"/>
+  <rect x="840" y="290" width="180" height="10" rx="5" fill="#9fb2ff"/>
+  <text x="640" y="88" fill="#ffffff" font-size="36" text-anchor="middle" font-family="Arial, sans-serif">Revisar inventario</text>
+</svg>
+
